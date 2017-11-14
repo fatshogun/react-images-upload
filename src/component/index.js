@@ -102,6 +102,11 @@ class ReactImageUploadComponent extends React.PureComponent {
 	 Remove the image from state
 	 */
 	removeImage(picture) {
+		// If callback giving, fire.
+                if (typeof this.props.onRemove === "function") {
+                        this.props.onRemove(picture);
+                }
+		
 		const filteredAry = this.state.pictures.filter((e) => e !== picture);
 		this.setState({pictures: filteredAry})
 	}
@@ -213,6 +218,7 @@ ReactImageUploadComponent.PropTypes = {
 	style: PropTypes.string,
 	className: PropTypes.string,
 	onChange: PropTypes.func,
+	onRemove: PropTypes.func,
 	buttonClassName: PropTypes.object,
 	buttonStyles: PropTypes.object,
 	withPreview: PropTypes.bool,
